@@ -1,0 +1,11 @@
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+.idea/
+
+# Raw source data mirrored from Google Drive; the app loads its copies
+# under assets/ (suras, hadeeth, data, fonts, images).
+/materialUneedFromDrive/

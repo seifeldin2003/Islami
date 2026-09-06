@@ -1,0 +1,115 @@
+/// The Qur'an index, generated from the course data set.
+///
+/// `arabicNames` / `englishNames` come from `Suras List.txt`; `versesCounts`
+/// is derived from the verse files under `assets/suras/`. All three are kept
+/// in sync by `test/suras_data_test.dart`, which re-counts the bundled
+/// assets and fails if this table drifts.
+library;
+
+import '../models/sura.dart';
+
+class SurasData {
+  const SurasData._();
+
+  /// Number of suras in the Qur'an.
+  static const int count = 114;
+
+  static const List<String> arabicNames = <String>[
+    'الفاتحه', 'البقرة', 'آل عمران', 'النساء',
+    'المائدة', 'الأنعام', 'الأعراف', 'الأنفال',
+    'التوبة', 'يونس', 'هود', 'يوسف',
+    'الرعد', 'إبراهيم', 'الحجر', 'النحل',
+    'الإسراء', 'الكهف', 'مريم', 'طه',
+    'الأنبياء', 'الحج', 'المؤمنون', 'النّور',
+    'الفرقان', 'الشعراء', 'النّمل', 'القصص',
+    'العنكبوت', 'الرّوم', 'لقمان', 'السجدة',
+    'الأحزاب', 'سبأ', 'فاطر', 'يس',
+    'الصافات', 'ص', 'الزمر', 'غافر',
+    'فصّلت', 'الشورى', 'الزخرف', 'الدّخان',
+    'الجاثية', 'الأحقاف', 'محمد', 'الفتح',
+    'الحجرات', 'ق', 'الذاريات', 'الطور',
+    'النجم', 'القمر', 'الرحمن', 'الواقعة',
+    'الحديد', 'المجادلة', 'الحشر', 'الممتحنة',
+    'الصف', 'الجمعة', 'المنافقون', 'التغابن',
+    'الطلاق', 'التحريم', 'الملك', 'القلم',
+    'الحاقة', 'المعارج', 'نوح', 'الجن',
+    'المزّمّل', 'المدّثر', 'القيامة', 'الإنسان',
+    'المرسلات', 'النبأ', 'النازعات', 'عبس',
+    'التكوير', 'الإنفطار', 'المطفّفين', 'الإنشقاق',
+    'البروج', 'الطارق', 'الأعلى', 'الغاشية',
+    'الفجر', 'البلد', 'الشمس', 'الليل',
+    'الضحى', 'الشرح', 'التين', 'العلق',
+    'القدر', 'البينة', 'الزلزلة', 'العاديات',
+    'القارعة', 'التكاثر', 'العصر', 'الهمزة',
+    'الفيل', 'قريش', 'الماعون', 'الكوثر',
+    'الكافرون', 'النصر', 'المسد', 'الإخلاص',
+    'الفلق', 'الناس',
+  ];
+
+  static const List<String> englishNames = <String>[
+    'Al-Fatiha', 'Al-Baqarah', 'Aal-E-Imran',
+    'An-Nisa\'', 'Al-Ma\'idah', 'Al-An\'am',
+    'Al-A\'raf', 'Al-Anfal', 'At-Tawbah',
+    'Yunus', 'Hud', 'Yusuf',
+    'Ar-Ra\'d', 'Ibrahim', 'Al-Hijr',
+    'An-Nahl', 'Al-Isra', 'Al-Kahf',
+    'Maryam', 'Ta-Ha', 'Al-Anbiya',
+    'Al-Hajj', 'Al-Mu\'minun', 'An-Nur',
+    'Al-Furqan', 'Ash-Shu\'ara', 'An-Naml',
+    'Al-Qasas', 'Al-Ankabut', 'Ar-Rum',
+    'Luqman', 'As-Sajda', 'Al-Ahzab',
+    'Saba', 'Fatir', 'Ya-Sin',
+    'As-Saffat', 'Sad', 'Az-Zumar',
+    'Ghafir', 'Fussilat', 'Ash-Shura',
+    'Az-Zukhruf', 'Ad-Dukhan', 'Al-Jathiya',
+    'Al-Ahqaf', 'Muhammad', 'Al-Fath',
+    'Al-Hujurat', 'Qaf', 'Adh-Dhariyat',
+    'At-Tur', 'An-Najm', 'Al-Qamar',
+    'Ar-Rahman', 'Al-Waqi\'a', 'Al-Hadid',
+    'Al-Mujadila', 'Al-Hashr', 'Al-Mumtahina',
+    'As-Saff', 'Al-Jumu\'a', 'Al-Munafiqun',
+    'At-Taghabun', 'At-Talaq', 'At-Tahrim',
+    'Al-Mulk', 'Al-Qalam', 'Al-Haqqah',
+    'Al-Ma\'arij', 'Nuh', 'Al-Jinn',
+    'Al-Muzzammil', 'Al-Muddathir', 'Al-Qiyamah',
+    'Al-Insan', 'Al-Mursalat', 'An-Naba\'',
+    'An-Nazi\'at', 'Abasa', 'At-Takwir',
+    'Al-Infitar', 'Al-Mutaffifin', 'Al-Inshiqaq',
+    'Al-Buruj', 'At-Tariq', 'Al-A\'la',
+    'Al-Ghashiyah', 'Al-Fajr', 'Al-Balad',
+    'Ash-Shams', 'Al-Lail', 'Ad-Duha',
+    'Ash-Sharh', 'At-Tin', 'Al-Alaq',
+    'Al-Qadr', 'Al-Bayyina', 'Az-Zalzalah',
+    'Al-Adiyat', 'Al-Qari\'a', 'At-Takathur',
+    'Al-Asr', 'Al-Humazah', 'Al-Fil',
+    'Quraysh', 'Al-Ma\'un', 'Al-Kawthar',
+    'Al-Kafirun', 'An-Nasr', 'Al-Masad',
+    'Al-Ikhlas', 'Al-Falaq', 'An-Nas',
+  ];
+
+  static const List<int> versesCounts = <int>[
+    7, 286, 200, 176, 120, 165, 206, 75, 129, 109, 123, 111,
+    43, 52, 99, 128, 111, 111, 98, 135, 108, 78, 118, 64,
+    77, 227, 93, 88, 69, 60, 34, 30, 73, 54, 44, 83,
+    182, 89, 75, 84, 54, 53, 89, 59, 37, 33, 38, 29,
+    18, 45, 60, 49, 62, 55, 78, 96, 28, 22, 24, 12,
+    14, 11, 11, 17, 12, 12, 30, 52, 52, 44, 28, 28,
+    20, 56, 40, 31, 50, 40, 46, 42, 29, 19, 36, 25,
+    22, 17, 19, 26, 30, 20, 15, 21, 11, 8, 8, 19,
+    5, 8, 8, 11, 11, 8, 3, 9, 5, 4, 7, 3,
+    6, 3, 5, 4, 5, 6,
+  ];
+
+  /// Every sura in order; sura 1 sits at position 0.
+  static final List<Sura> all = List<Sura>.unmodifiable(
+    List<Sura>.generate(
+      count,
+      (index) => Sura(
+        number: index + 1,
+        arabicName: arabicNames[index],
+        englishName: englishNames[index],
+        versesCount: versesCounts[index],
+      ),
+    ),
+  );
+}
