@@ -1,18 +1,24 @@
 import 'dart:ui' show lerpDouble;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/app_assets.dart';
-import '../../../core/app_dimens.dart';
 import '../../../core/data/hadith_repository.dart';
-import '../../../core/design_scale.dart';
 import '../../../core/models/hadith.dart';
 import '../../../core/widgets/islami_header.dart';
 import '../../home/widgets/scrim_backdrop.dart';
 import '../widgets/hadith_card.dart';
 
-/// Figma `Hadeth Screen` (node 40:12): the fifty hadiths as a paged
-/// carousel, the neighbouring cards peeking in at a slightly smaller scale.
+/// Page extent as a fraction of the canvas: one 319pt slot on a 430pt
+/// artboard. A fraction, so it is not scaled.
+const double _kCardViewport = 319 / 430;
+
+/// Neighbouring cards render at 293/313 of the active card.
+const double _kSideScale = 293 / 313;
+
+/// The fifty hadiths as a paged carousel, the neighbouring cards peeking
+/// in at a slightly smaller scale.
 class HadethTab extends StatefulWidget {
   const HadethTab({super.key, required this.onHadithSelected});
 
@@ -24,7 +30,7 @@ class HadethTab extends StatefulWidget {
 
 class _HadethTabState extends State<HadethTab> {
   final PageController _controller = PageController(
-    viewportFraction: AppDimens.hadithCardViewport,
+    viewportFraction: _kCardViewport,
   );
 
   /// Held in the state: building the future inside `build` would hand the
@@ -41,16 +47,16 @@ class _HadethTabState extends State<HadethTab> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        const ScrimBackdrop(
+        ScrimBackdrop(
           image: AppAssets.hadethBackground,
-          designHeight: AppDimens.hadethBackdropHeight,
+          designHeight: 567.h,
         ),
         SafeArea(
           bottom: false,
           child: Column(
             children: <Widget>[
               const IslamiHeader(),
-              const SizedBox(height: AppDimens.hadethHeaderGap),
+              SizedBox(height: 13.h),
               Expanded(
                 child: _Carousel(
                   controller: _controller,
@@ -98,7 +104,7 @@ class _Carousel extends StatelessWidget {
         }
         return Center(
           child: SizedBox(
-            height: context.dy(AppDimens.hadithCardHeight),
+            height: 618.h,
             child: PageView.builder(
               controller: controller,
               itemCount: hadiths.length,
@@ -109,14 +115,14 @@ class _Carousel extends StatelessWidget {
                       (_pageOf(controller) - index).abs().clamp(0.0, 1.0);
                   final scale = lerpDouble(
                     1,
-                    AppDimens.hadithCardSideScale,
+                    _kSideScale,
                     distance,
                   )!;
                   return Transform.scale(scale: scale, child: child);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppDimens.hadithCardGap,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 3.w,
                   ),
                   child: HadithCard(
                     hadith: hadiths[index],

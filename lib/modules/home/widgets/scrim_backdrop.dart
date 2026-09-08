@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/design_scale.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Figma `Background`: a photograph behind a scrim that fades from
+/// A photograph behind a scrim that fades from
 /// `rgba(32,32,32,0.7)` into the flat app background.
 ///
 /// The Qur'an and Hadeth destinations use different photographs and
@@ -17,7 +17,7 @@ class ScrimBackdrop extends StatelessWidget {
 
   final String image;
 
-  /// Height as authored on the Figma canvas.
+  /// Height as authored on the design canvas.
   final double designHeight;
 
   @override
@@ -26,7 +26,7 @@ class ScrimBackdrop extends StatelessWidget {
       left: 0,
       right: 0,
       top: 0,
-      height: context.dy(designHeight),
+      height: designHeight.h,
       child: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(

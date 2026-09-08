@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../core/app_strings.dart';
 import '../../../core/data/prayer_times_service.dart';
 
-/// One prayer as the Figma `Pray Time` tile presents it.
+/// One prayer, as a tile presents it.
 class PrayerEntry {
   const PrayerEntry({
     required this.prayer,

@@ -1,8 +1,8 @@
 import '../app_assets.dart';
 import '../app_strings.dart';
 
-/// The four azkar collections the Figma `Group 19` grid shows, mapped onto
-/// the Arabic keys used inside `assets/data/azkar.json`.
+/// The four azkar collections the home grid offers, mapped onto the
+/// Arabic keys used inside `assets/data/azkar.json`.
 enum AzkarCategory {
   evening(AppStrings.azkarEvening, 'أذكار المساء', AppAssets.azkarEvening),
   morning(AppStrings.azkarMorning, 'أذكار الصباح', AppAssets.azkarMorning),

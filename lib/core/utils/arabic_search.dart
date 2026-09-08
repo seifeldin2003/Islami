@@ -1,7 +1,7 @@
 /// Text folding used by the sura / hadeth search fields.
 ///
 /// The bundled data spells names one way and users type them another
-/// (e.g. `الفاتحه` in the data set vs `الفاتحة` in the Figma mock-up), so a
+/// (e.g. `الفاتحه` in the data set vs `الفاتحة` as usually typed), so a
 /// plain `contains` misses obvious matches. Folding removes diacritics and
 /// collapses the letter forms Arabic typists use interchangeably.
 class ArabicSearch {
@@ -13,9 +13,13 @@ class ArabicSearch {
   );
 
   static const Map<String, String> _foldings = <String, String>{
-    'أ': 'ا', 'إ': 'ا', 'آ': 'ا', 'ٱ': 'ا',
+    'أ': 'ا',
+    'إ': 'ا',
+    'آ': 'ا',
+    'ٱ': 'ا',
     'ة': 'ه',
-    'ى': 'ي', 'ئ': 'ي',
+    'ى': 'ي',
+    'ئ': 'ي',
     'ؤ': 'و',
   };
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/app_routes.dart';
 import 'core/app_strings.dart';
@@ -10,7 +11,12 @@ import 'modules/quran/screens/sura_details_screen.dart';
 import 'modules/times/screens/azkar_details_screen.dart';
 import 'modules/splash/screens/splash_screen.dart';
 
-void main() {
+/// The artboard every screen is authored against.
+const Size kDesignSize = Size(430, 932);
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
   runApp(const IslamiApp());
 }
 
@@ -19,19 +25,23 @@ class IslamiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppStrings.appTitle,
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.dark,
-      initialRoute: AppRoutes.splash,
-      routes: {
-        AppRoutes.splash: (_) => const SplashScreen(),
-        AppRoutes.intro: (_) => const IntroScreen(),
-        AppRoutes.home: (_) => const HomeScreen(),
-        AppRoutes.suraDetails: SuraDetailsScreen.fromRoute,
-        AppRoutes.hadithDetails: HadithDetailsScreen.fromRoute,
-        AppRoutes.azkarDetails: AzkarDetailsScreen.fromRoute,
-      },
+    return ScreenUtilInit(
+      designSize: kDesignSize,
+      minTextAdapt: true,
+      child: MaterialApp(
+        title: AppStrings.appTitle,
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.dark,
+        initialRoute: AppRoutes.splash,
+        routes: <String, WidgetBuilder>{
+          AppRoutes.splash: (_) => const SplashScreen(),
+          AppRoutes.intro: (_) => const IntroScreen(),
+          AppRoutes.home: (_) => const HomeScreen(),
+          AppRoutes.suraDetails: SuraDetailsScreen.fromRoute,
+          AppRoutes.hadithDetails: HadithDetailsScreen.fromRoute,
+          AppRoutes.azkarDetails: AzkarDetailsScreen.fromRoute,
+        },
+      ),
     );
   }
 }

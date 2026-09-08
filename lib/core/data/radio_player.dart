@@ -27,8 +27,7 @@ class RadioPlayer extends ChangeNotifier {
   bool isPlaying(RadioStation station) => _current == station && _isPlaying;
 
   /// Whether [station] is still opening its stream.
-  bool isBuffering(RadioStation station) =>
-      _current == station && _isBuffering;
+  bool isBuffering(RadioStation station) => _current == station && _isBuffering;
 
   /// The station that last refused to open, if any.
   RadioStation? get failed => _failed;

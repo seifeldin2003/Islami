@@ -47,8 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SuraDetailsScreen.open(context, sura);
   }
 
-  void _openHadith(Hadith hadith) =>
-      HadithDetailsScreen.open(context, hadith);
+  void _openHadith(Hadith hadith) => HadithDetailsScreen.open(context, hadith);
 
   void _openAzkar(AzkarCategory category) =>
       AzkarDetailsScreen.open(context, category);

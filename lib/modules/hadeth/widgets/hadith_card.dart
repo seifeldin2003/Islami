@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/app_assets.dart';
-import '../../../core/app_dimens.dart';
 import '../../../core/models/hadith.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Figma `Hadith Card`: a gold tile with filigree corners, a faint book
+/// The watermark covers 428 of the card's 618pt height, at a quarter
+/// strength. Both are ratios, so neither is scaled.
+const double _kWatermarkHeightFactor = 428 / 618;
+const double _kWatermarkOpacity = 0.25;
+
+/// A gold tile carrying one hadith: filigree corners, a faint book
 /// watermark and a mosque band along its foot.
 class HadithCard extends StatelessWidget {
   const HadithCard({super.key, required this.hadith, required this.onTap});
@@ -21,16 +26,16 @@ class HadithCard extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: AppColors.gold,
-          borderRadius: BorderRadius.circular(AppDimens.hadithCardRadius),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         child: Stack(
           children: <Widget>[
             Center(
               child: FractionallySizedBox(
                 widthFactor: 1,
-                heightFactor: AppDimens.hadithCardWatermarkHeightFactor,
+                heightFactor: _kWatermarkHeightFactor,
                 child: Opacity(
-                  opacity: AppDimens.hadithCardWatermarkOpacity,
+                  opacity: _kWatermarkOpacity,
                   child: Image.asset(
                     AppAssets.hadithCardWatermark,
                     fit: BoxFit.contain,
@@ -42,27 +47,27 @@ class HadithCard extends StatelessWidget {
               left: 0,
               right: 0,
               bottom: 0,
-              height: AppDimens.hadithCardMosqueHeight,
+              height: 89.h,
               child: Image.asset(
                 AppAssets.cardMosqueBand,
                 fit: BoxFit.cover,
               ),
             ),
-            const Positioned(
-              left: AppDimens.hadithCardCornerInset,
-              top: AppDimens.hadithCardCornerInset,
-              child: _CardCorner(mirrored: true),
+            Positioned(
+              left: 10.r,
+              top: 10.r,
+              child: const _CardCorner(mirrored: true),
             ),
-            const Positioned(
-              right: AppDimens.hadithCardCornerInset,
-              top: AppDimens.hadithCardCornerInset,
-              child: _CardCorner(),
+            Positioned(
+              right: 10.r,
+              top: 10.r,
+              child: const _CardCorner(),
             ),
             Positioned.fill(
               child: Padding(
-                padding: const EdgeInsets.only(
-                  top: AppDimens.hadithCardTitleTop,
-                  bottom: AppDimens.hadithCardPadding,
+                padding: EdgeInsets.only(
+                  top: 43.h,
+                  bottom: 25.h,
                 ),
                 child: Column(
                   children: <Widget>[
@@ -71,10 +76,10 @@ class HadithCard extends StatelessWidget {
                       textDirection: TextDirection.rtl,
                       style: AppTextStyles.hadithCardTitle,
                     ),
-                    const SizedBox(height: AppDimens.hadithCardTitleGap),
+                    SizedBox(height: 25.h),
                     Expanded(
                       child: SizedBox(
-                        width: AppDimens.hadithCardBodyWidth,
+                        width: 266.w,
                         // Many hadiths are far longer than the card, so the
                         // body scrolls in place; the carousel still pages
                         // horizontally around it.
@@ -108,8 +113,8 @@ class _CardCorner extends StatelessWidget {
   Widget build(BuildContext context) {
     final corner = Image.asset(
       AppAssets.hadithCardCorner,
-      width: AppDimens.hadithCardCornerSize,
-      height: AppDimens.hadithCardCornerSize,
+      width: 93.r,
+      height: 93.r,
     );
     if (!mirrored) return corner;
     return Transform.flip(flipX: true, child: corner);

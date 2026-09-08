@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:adhan/adhan.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/app_assets.dart';
-import '../../../core/app_dimens.dart';
 import '../../../core/app_durations.dart';
 import '../../../core/app_strings.dart';
 import '../../../core/data/prayer_times_service.dart';
@@ -16,8 +16,10 @@ import '../models/prayer_schedule.dart';
 import '../widgets/azkar_card.dart';
 import '../widgets/prayer_panel.dart';
 
-/// Figma `Time Screen` (node 104:18): today's prayer schedule above the
-/// azkar collections.
+/// Azkar tiles are 185 x 259 on the artboard; the ratio drives the grid.
+const double _kAzkarAspectRatio = 185 / 259;
+
+/// Today's prayer schedule above the azkar collections.
 class TimesTab extends StatefulWidget {
   const TimesTab({super.key, required this.onAzkarSelected});
 
@@ -53,27 +55,27 @@ class _TimesTabState extends State<TimesTab> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        const ScrimBackdrop(
+        ScrimBackdrop(
           image: AppAssets.timesBackground,
-          designHeight: AppDimens.timesBackdropHeight,
+          designHeight: 852.h,
         ),
         SafeArea(
           bottom: false,
           child: ListView(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppDimens.homeGutter,
+            padding: EdgeInsets.symmetric(
+              horizontal: 20.w,
             ),
             children: <Widget>[
               const Center(child: IslamiHeader()),
-              const SizedBox(height: AppDimens.azkarSectionGap),
+              SizedBox(height: 20.h),
               FutureBuilder<Coordinates>(
                 future: _coordinates,
                 builder: (context, snapshot) {
                   final coordinates = snapshot.data;
                   if (coordinates == null) {
-                    return const SizedBox(
-                      height: AppDimens.prayPanelHeight,
-                      child: Center(child: CircularProgressIndicator()),
+                    return SizedBox(
+                      height: 301.h,
+                      child: const Center(child: CircularProgressIndicator()),
                     );
                   }
                   return PrayerPanel(
@@ -81,19 +83,19 @@ class _TimesTabState extends State<TimesTab> {
                   );
                 },
               ),
-              const SizedBox(height: AppDimens.azkarSectionGap),
-              const Text(
+              SizedBox(height: 20.h),
+              Text(
                 AppStrings.azkarSection,
                 style: AppTextStyles.sectionTitle,
               ),
-              const SizedBox(height: AppDimens.azkarSectionGap),
+              SizedBox(height: 20.h),
               GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 2,
-                mainAxisSpacing: AppDimens.azkarCardGap,
-                crossAxisSpacing: AppDimens.azkarCardGap,
-                childAspectRatio: AppDimens.azkarCardAspectRatio,
+                mainAxisSpacing: 20.r,
+                crossAxisSpacing: 20.r,
+                childAspectRatio: _kAzkarAspectRatio,
                 children: <Widget>[
                   for (final category in AzkarCategory.values)
                     AzkarCard(
@@ -102,7 +104,7 @@ class _TimesTabState extends State<TimesTab> {
                     ),
                 ],
               ),
-              const SizedBox(height: AppDimens.azkarSectionGap),
+              SizedBox(height: 20.h),
             ],
           ),
         ),

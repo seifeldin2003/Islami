@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/app_assets.dart';
-import '../../../core/app_dimens.dart';
 import '../../../core/app_strings.dart';
 import '../../../core/data/radio_player.dart';
 import '../../../core/data/radio_repository.dart';
@@ -14,7 +14,7 @@ import '../../home/widgets/scrim_backdrop.dart';
 import '../widgets/radio_station_card.dart';
 import '../widgets/segment_control.dart';
 
-/// Figma `Radio Screen` (node 54:12): the Qur'an radio line-up.
+/// The Qur'an radio line-up.
 ///
 /// The published list runs to well over a hundred stations, so it carries a
 /// filter above it. Only the `Radio` segment has content — `Reciters` is a
@@ -70,19 +70,19 @@ class _RadioTabState extends State<RadioTab> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        const ScrimBackdrop(
+        ScrimBackdrop(
           image: AppAssets.radioBackground,
-          designHeight: AppDimens.radioBackdropHeight,
+          designHeight: 852.h,
         ),
         SafeArea(
           bottom: false,
           child: Column(
             children: <Widget>[
               const IslamiHeader(),
-              const SizedBox(height: AppDimens.radioTopGap),
+              SizedBox(height: 7.h),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimens.homeGutter,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
                 ),
                 child: SegmentControl(
                   labels: const <String>[
@@ -94,10 +94,10 @@ class _RadioTabState extends State<RadioTab> {
                 ),
               ),
               if (_segment == _radioSegment) ...<Widget>[
-                const SizedBox(height: AppDimens.radioCardGap),
+                SizedBox(height: 16.h),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppDimens.homeGutter,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
                   ),
                   child: AppSearchField(
                     controller: _searchController,
@@ -106,7 +106,7 @@ class _RadioTabState extends State<RadioTab> {
                   ),
                 ),
               ],
-              const SizedBox(height: AppDimens.radioCardGap),
+              SizedBox(height: 16.h),
               Expanded(
                 child: _segment == _radioSegment
                     ? ValueListenableBuilder<List<RadioStation>>(
@@ -138,7 +138,7 @@ class _StationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (stations.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(AppStrings.noMatches, style: AppTextStyles.sectionTitle),
       );
     }
@@ -149,12 +149,11 @@ class _StationList extends StatelessWidget {
         final player = RadioPlayer.instance;
         return ListView.separated(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppDimens.homeGutter,
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.w,
           ),
           itemCount: stations.length,
-          separatorBuilder: (_, __) =>
-              const SizedBox(height: AppDimens.radioCardGap),
+          separatorBuilder: (_, __) => SizedBox(height: 16.h),
           itemBuilder: (context, index) {
             final station = stations[index];
             return RadioStationCard(

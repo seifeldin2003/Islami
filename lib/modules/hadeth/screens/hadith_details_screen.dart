@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/app_dimens.dart';
 import '../../../core/app_routes.dart';
 import '../../../core/app_strings.dart';
-import '../../../core/design_scale.dart';
 import '../../../core/models/hadith.dart';
 import '../../../core/route_arguments.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/detail_scaffold.dart';
 
-/// Figma `Soura Details Screen` with hadith copy (node 138:18): the full
-/// text of one hadith on the shared detail chrome.
+/// The full text of one hadith, on the shared detail chrome.
 class HadithDetailsScreen extends StatelessWidget {
   const HadithDetailsScreen({super.key, required this.hadith});
 
@@ -32,9 +30,9 @@ class HadithDetailsScreen extends StatelessWidget {
       heading: hadith.title,
       child: SingleChildScrollView(
         padding: EdgeInsets.only(
-          left: AppDimens.hadithDetailGutter,
-          right: AppDimens.hadithDetailGutter,
-          bottom: context.dy(AppDimens.detailBottomDecorationHeight),
+          left: 23.w,
+          right: 23.w,
+          bottom: 112.h,
         ),
         child: Text(
           hadith.body,

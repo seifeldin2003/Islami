@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/app_dimens.dart';
 import '../../../core/models/azkar_category.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Figma `Group 15` (node 123:84): an outlined tile for one azkar
-/// collection.
+/// An outlined tile for one azkar collection.
 class AzkarCard extends StatelessWidget {
   const AzkarCard({super.key, required this.category, required this.onTap});
 
@@ -23,9 +22,9 @@ class AzkarCard extends StatelessWidget {
           color: AppColors.background,
           border: Border.all(
             color: AppColors.gold,
-            width: AppDimens.azkarCardBorder,
+            width: 2.r,
           ),
-          borderRadius: BorderRadius.circular(AppDimens.azkarCardRadius),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         child: Column(
           children: <Widget>[
@@ -35,7 +34,7 @@ class AzkarCard extends StatelessWidget {
               textAlign: TextAlign.center,
               style: AppTextStyles.azkarCardTitle,
             ),
-            const SizedBox(height: AppDimens.azkarCardTitleGap),
+            SizedBox(height: 6.h),
           ],
         ),
       ),

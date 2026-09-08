@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/app_dimens.dart';
 import '../../../core/app_durations.dart';
 import '../../../core/app_routes.dart';
 import '../../../core/app_strings.dart';
@@ -9,7 +9,7 @@ import '../../../core/widgets/islami_header.dart';
 import '../widgets/onboarding_progress_dots.dart';
 import 'intro_page_data.dart';
 
-/// The five onboarding slides from the Figma `Intro Screen` flow.
+/// The five onboarding slides.
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
 
@@ -54,7 +54,7 @@ class _IntroScreenState extends State<IntroScreen> {
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AppDimens.screenPadding),
+          padding: EdgeInsets.all(16.r),
           child: Column(
             children: [
               const IslamiHeader(),
@@ -98,21 +98,21 @@ class _IntroSlide extends StatelessWidget {
           style: AppTextStyles.title,
         ),
         if (data.body != null) ...[
-          const SizedBox(height: AppDimens.introTitleGap),
+          SizedBox(height: 16.h),
           Text(
             data.body!,
             textAlign: TextAlign.center,
             style: AppTextStyles.body,
           ),
         ],
-        const SizedBox(height: AppDimens.introSlideBottomGap),
+        SizedBox(height: 24.h),
       ],
     );
   }
 }
 
-/// Figma `Frame 4`: Back on the left, the progress pill centred, and
-/// Next / Finish on the right.
+/// Back on the left, the progress pill centred, and Next / Finish on the
+/// right.
 class _BottomBar extends StatelessWidget {
   const _BottomBar({
     required this.index,
@@ -133,11 +133,11 @@ class _BottomBar extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: AppDimens.introNavButtonWidth,
+          width: 48.w,
           child: showBack
               ? GestureDetector(
                   onTap: onBack,
-                  child: const Text(
+                  child: Text(
                     AppStrings.back,
                     style: AppTextStyles.button,
                   ),
@@ -153,7 +153,7 @@ class _BottomBar extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: AppDimens.introNavButtonWidth,
+          width: 48.w,
           child: GestureDetector(
             onTap: onNext,
             child: Text(

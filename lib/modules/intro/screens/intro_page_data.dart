@@ -1,7 +1,7 @@
 import '../../../core/app_assets.dart';
 import '../../../core/app_strings.dart';
 
-/// One onboarding slide, as authored in the Figma `Intro Screen` frames.
+/// One onboarding slide.
 class IntroPageData {
   const IntroPageData({
     required this.illustration,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../core/app_dimens.dart';
 import '../../../core/theme/app_theme.dart';
 import '../models/home_tab.dart';
 
-/// Figma `Bottom Navigation Bar`: a gold bar where the selected destination
-/// sits in a dark pill with its label underneath.
+/// A gold bar where the selected destination sits in a dark pill with its
+/// label underneath.
 class AppBottomNavBar extends StatelessWidget {
   const AppBottomNavBar({
     super.key,
@@ -20,10 +20,10 @@ class AppBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppDimens.navBarHeight + MediaQuery.viewPaddingOf(context).bottom,
+      height: 64.h + MediaQuery.viewPaddingOf(context).bottom,
       color: AppColors.gold,
       padding: EdgeInsets.only(
-        top: AppDimens.navBarPadding,
+        top: 6.h,
         bottom: MediaQuery.viewPaddingOf(context).bottom,
       ),
       child: Row(
@@ -57,7 +57,7 @@ class _NavItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final icon = SvgPicture.asset(
       tab.icon,
-      height: AppDimens.navIconSize,
+      height: 26.r,
       colorFilter: ColorFilter.mode(
         isSelected ? Colors.white : AppColors.background,
         BlendMode.srcIn,
@@ -70,28 +70,33 @@ class _NavItem extends StatelessWidget {
       label: tab.label,
       child: InkWell(
         onTap: onTap,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            if (isSelected)
-              Container(
-                width: AppDimens.navPillWidth,
-                height: AppDimens.navPillHeight,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColors.navSelectedPill,
-                  borderRadius: BorderRadius.circular(AppDimens.navPillRadius),
+        // On a short screen the bar's own height shrinks faster than its
+        // text does, so the contents scale down instead of overflowing.
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              if (isSelected)
+                Container(
+                  width: 59.w,
+                  height: 34.h,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: AppColors.navSelectedPill,
+                    borderRadius: BorderRadius.circular(66.r),
+                  ),
+                  child: icon,
+                )
+              else
+                SizedBox(height: 34.h, child: Center(child: icon)),
+              if (isSelected)
+                Padding(
+                  padding: EdgeInsets.only(top: 2.h),
+                  child: Text(tab.label, style: AppTextStyles.navLabel),
                 ),
-                child: icon,
-              )
-            else
-              SizedBox(height: AppDimens.navPillHeight, child: Center(child: icon)),
-            if (isSelected)
-              Padding(
-                padding: const EdgeInsets.only(top: AppDimens.navLabelGap),
-                child: Text(tab.label, style: AppTextStyles.navLabel),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );

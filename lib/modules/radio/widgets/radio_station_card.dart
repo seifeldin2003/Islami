@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/app_assets.dart';
-import '../../../core/app_dimens.dart';
 import '../../../core/app_strings.dart';
 import '../../../core/models/radio_station.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Figma `Rectangle 132` (node 103:403): a gold station tile.
+/// A gold station tile.
 ///
 /// While the station is streaming the mosque band is replaced by the sound
 /// wave and the play control becomes a pause.
@@ -32,11 +32,11 @@ class RadioStationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppDimens.radioCardHeight,
+      height: 133.h,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: AppColors.gold,
-        borderRadius: BorderRadius.circular(AppDimens.radioCardRadius),
+        borderRadius: BorderRadius.circular(20.r),
       ),
       child: Stack(
         children: <Widget>[
@@ -44,7 +44,7 @@ class RadioStationCard extends StatelessWidget {
             left: 0,
             right: 0,
             bottom: 0,
-            height: AppDimens.radioCardBandHeight,
+            height: 97.h,
             child: isPlaying || isBuffering
                 ? SvgPicture.asset(AppAssets.soundWave, fit: BoxFit.cover)
                 : Image.asset(
@@ -54,17 +54,17 @@ class RadioStationCard extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              const SizedBox(height: AppDimens.radioCardNameTop),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimens.radioCardNameInset,
-                ),
-                child: Text(
-                station.name,
-                textAlign: TextAlign.center,
-                style: AppTextStyles.radioStation,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+              SizedBox(height: 14.h),
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Text(
+                    station.name,
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.radioStation,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
               Expanded(
@@ -73,12 +73,12 @@ class RadioStationCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       if (isBuffering)
-                        const SizedBox(
-                          width: AppDimens.radioIconSize,
-                          height: AppDimens.radioIconSize,
+                        SizedBox(
+                          width: 44.r,
+                          height: 44.r,
                           child: Padding(
-                            padding: EdgeInsets.all(AppDimens.radioIconGap),
-                            child: CircularProgressIndicator(
+                            padding: EdgeInsets.all(12.w),
+                            child: const CircularProgressIndicator(
                               strokeWidth: 2,
                               color: AppColors.background,
                             ),
@@ -87,14 +87,14 @@ class RadioStationCard extends StatelessWidget {
                       else
                         _CardButton(
                           icon: isPlaying ? Icons.pause : Icons.play_arrow,
-                          size: AppDimens.radioIconSize,
+                          size: 44.r,
                           semanticLabel: station.name,
                           onTap: onPlayPause,
                         ),
-                      const SizedBox(width: AppDimens.radioIconGap),
+                      SizedBox(width: 12.w),
                       _CardButton(
                         icon: isMuted ? Icons.volume_off : Icons.volume_up,
-                        size: AppDimens.radioVolumeIconSize,
+                        size: 30.r,
                         semanticLabel: AppStrings.volume,
                         onTap: onToggleMute,
                       ),

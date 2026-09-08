@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/app_dimens.dart';
 import '../../../core/app_routes.dart';
 import '../../../core/data/sura_repository.dart';
-import '../../../core/design_scale.dart';
 import '../../../core/models/sura.dart';
 import '../../../core/route_arguments.dart';
 import '../../../core/widgets/detail_scaffold.dart';
 import '../widgets/verse_card.dart';
 
-/// Figma `Soura Details Screen` (node 135:29): the verses of one sura, each
-/// in its own outlined card.
+/// The verses of one sura, each in its own outlined card.
 class SuraDetailsScreen extends StatelessWidget {
   const SuraDetailsScreen({super.key, required this.sura});
 
@@ -38,13 +36,12 @@ class SuraDetailsScreen extends StatelessWidget {
           }
           return ListView.separated(
             padding: EdgeInsets.only(
-              left: AppDimens.verseCardGutter,
-              right: AppDimens.verseCardGutter,
-              bottom: context.dy(AppDimens.detailBottomDecorationHeight),
+              left: 18.w,
+              right: 18.w,
+              bottom: 112.h,
             ),
             itemCount: verses.length,
-            separatorBuilder: (_, __) =>
-                const SizedBox(height: AppDimens.verseCardGap),
+            separatorBuilder: (_, __) => SizedBox(height: 8.h),
             itemBuilder: (context, index) => VerseCard(
               number: index + 1,
               text: verses[index],

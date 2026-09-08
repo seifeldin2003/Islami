@@ -10,8 +10,8 @@ void main() {
     expect(ArabicSearch.fold('مُحَمَّد'), 'محمد');
   });
 
-  test('the Figma search query matches the data set spelling', () {
-    // The mock-up types `الفاتحة`; the data set stores `الفاتحه`.
+  test('a differently spelled query still matches the data set', () {
+    // Typed as `الفاتحة`; the data set stores `الفاتحه`.
     final matches = SurasData.all
         .where((s) => ArabicSearch.matches(s.arabicName, 'الفاتحة'))
         .toList();

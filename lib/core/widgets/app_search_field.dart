@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../app_assets.dart';
-import '../app_dimens.dart';
 import '../theme/app_theme.dart';
 
-/// Figma `TextFormFeild`: the search box used by the sura list and the
-/// radio line-up.
+/// The search box used by the sura list and the radio line-up.
 class AppSearchField extends StatelessWidget {
   const AppSearchField({
     super.key,
@@ -22,21 +21,21 @@ class AppSearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppDimens.searchFieldHeight,
+      height: 55.h,
       decoration: BoxDecoration(
         color: AppColors.scrim,
         border: Border.all(color: AppColors.gold),
-        borderRadius: BorderRadius.circular(AppDimens.searchFieldRadius),
+        borderRadius: BorderRadius.circular(10.r),
       ),
       child: Row(
         children: <Widget>[
-          const SizedBox(width: AppDimens.searchFieldPadding),
+          SizedBox(width: 14.w),
           SvgPicture.asset(
             AppAssets.icSearchQuran,
-            width: AppDimens.searchIconSize,
-            height: AppDimens.searchIconSize,
+            width: 28.r,
+            height: 28.r,
           ),
-          const SizedBox(width: AppDimens.searchIconGap),
+          SizedBox(width: 15.w),
           Expanded(
             child: TextField(
               controller: controller,
@@ -52,7 +51,7 @@ class AppSearchField extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: AppDimens.searchFieldPadding),
+          SizedBox(width: 14.w),
         ],
       ),
     );

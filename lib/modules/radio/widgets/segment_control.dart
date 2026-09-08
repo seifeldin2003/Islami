@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/app_dimens.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Figma `Button` + `Rectangle 129` (node 100:275): a two-way switch where
-/// the selected half is a gold pill on a dark track.
+/// A two-way switch where the selected half is a gold pill on a dark
+/// track.
 class SegmentControl extends StatelessWidget {
   const SegmentControl({
     super.key,
@@ -20,10 +20,10 @@ class SegmentControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppDimens.segmentHeight,
+      height: 40.h,
       decoration: BoxDecoration(
         color: AppColors.scrim,
-        borderRadius: BorderRadius.circular(AppDimens.segmentRadius),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
         children: <Widget>[
@@ -38,7 +38,7 @@ class SegmentControl extends StatelessWidget {
                       ? BoxDecoration(
                           color: AppColors.gold,
                           borderRadius: BorderRadius.circular(
-                            AppDimens.segmentRadius,
+                            12.r,
                           ),
                         )
                       : null,

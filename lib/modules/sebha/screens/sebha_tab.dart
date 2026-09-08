@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/app_assets.dart';
-import '../../../core/app_dimens.dart';
 import '../../../core/app_strings.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/islami_header.dart';
 import '../../home/widgets/scrim_backdrop.dart';
 import '../widgets/sebha_beads.dart';
 
-/// Figma `Sebha Screen` (node 51:117): a tasbeeh counter.
-///
-/// Each tap turns the ring by one bead and advances the count; after
-/// [AppDimens.tasbeehTarget] the count restarts and the next phrase in
-/// [AppStrings.tasbeehPhrases] takes over.
 class SebhaTab extends StatefulWidget {
   const SebhaTab({super.key});
+
+  /// A full round of tasbeeh.
+  static const int tasbeehTarget = 33;
+
+  /// One bead of the 33-bead ring, in turns.
+  static const double beadTurn = 1 / tasbeehTarget;
 
   @override
   State<SebhaTab> createState() => SebhaTabState();
@@ -31,11 +32,10 @@ class SebhaTabState extends State<SebhaTab> {
 
   void tally() {
     setState(() {
-      _turns += AppDimens.sebhaBeadTurn;
-      if (_count >= AppDimens.tasbeehTarget) {
+      _turns += SebhaTab.beadTurn;
+      if (_count >= SebhaTab.tasbeehTarget) {
         _count = 1;
-        _phraseIndex =
-            (_phraseIndex + 1) % AppStrings.tasbeehPhrases.length;
+        _phraseIndex = (_phraseIndex + 1) % AppStrings.tasbeehPhrases.length;
       } else {
         _count++;
       }
@@ -44,47 +44,48 @@ class SebhaTabState extends State<SebhaTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        const ScrimBackdrop(
-          image: AppAssets.sebhaBackground,
-          designHeight: AppDimens.sebhaBackdropHeight,
-        ),
-        SafeArea(
-          bottom: false,
-          child: Column(
-            children: <Widget>[
-              const IslamiHeader(),
-              const SizedBox(height: AppDimens.sebhaVerseGap),
-              const Text(
-                AppStrings.sebhaVerse,
-                textDirection: TextDirection.rtl,
-                textAlign: TextAlign.center,
-                style: AppTextStyles.sebha,
-              ),
-              const SizedBox(height: AppDimens.sebhaVerseGap),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: AppDimens.sebhaBottomGap,
-                  ),
-                  // The beads are authored at a fixed size; scale them to
-                  // whatever the header and the bottom bar leave behind so
-                  // the ring is never clipped.
-                  child: FittedBox(
-                    child: SebhaBeads(
-                      turns: _turns,
-                      phrase: phrase,
-                      count: _count,
-                      onTap: tally,
+    return Center(
+      child: Stack(
+        children: <Widget>[
+          ScrimBackdrop(
+            image: AppAssets.sebhaBackground,
+            designHeight: 852.h,
+          ),
+          SafeArea(
+            bottom: false,
+            child: Column(
+              children: <Widget>[
+                const IslamiHeader(),
+                SizedBox(height: 16.h),
+                Text(
+                  AppStrings.sebhaVerse,
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.sebha,
+                ),
+                SizedBox(height: 16.h),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 16.h),
+                    // `scaleDown` rather than `contain`: the beads keep their
+                    // authored proportions and only shrink when the header and
+                    // the bottom bar leave too little room.
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: SebhaBeads(
+                        turns: _turns,
+                        phrase: phrase,
+                        count: _count,
+                        onTap: tally,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

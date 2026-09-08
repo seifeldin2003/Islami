@@ -12,8 +12,8 @@ import '../models/radio_station.dart';
 ///
 /// The bundled snapshot in `assets/data/radios.json` is the primary source,
 /// so the list appears instantly and works with no connection at all. A
-/// refresh from mp3quran.net — the same source the Figma mock-up was
-/// populated from — runs afterwards and updates [line] if it succeeds.
+/// refresh from mp3quran.net runs afterwards and updates [line] if it
+/// succeeds.
 class RadioRepository {
   const RadioRepository._();
 

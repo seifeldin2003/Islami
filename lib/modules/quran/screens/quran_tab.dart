@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/app_dimens.dart';
 import '../../../core/app_strings.dart';
 import '../../../core/data/recent_suras_store.dart';
 import '../../../core/data/suras_data.dart';
@@ -14,8 +14,8 @@ import '../widgets/recent_sura_card.dart';
 import '../widgets/sura_row.dart';
 import '../../../core/widgets/app_search_field.dart';
 
-/// Figma `Home Screen` (node 27:34072): the Qur'an destination — header,
-/// search, "Most Recently" carousel and the full sura list.
+/// The Qur'an destination: header, search, "Most Recently" carousel and
+/// the full sura list.
 class QuranTab extends StatefulWidget {
   const QuranTab({super.key, required this.onSuraSelected});
 
@@ -52,9 +52,9 @@ class _QuranTabState extends State<QuranTab> {
 
     return Stack(
       children: <Widget>[
-        const ScrimBackdrop(
+        ScrimBackdrop(
           image: AppAssets.homeBackground,
-          designHeight: AppDimens.homeBackdropHeight,
+          designHeight: 862.h,
         ),
         _buildList(context, results),
       ],
@@ -70,10 +70,10 @@ class _QuranTabState extends State<QuranTab> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               const Center(child: IslamiHeader()),
-              const SizedBox(height: AppDimens.homeHeaderGap),
+              SizedBox(height: 21.h),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimens.homeGutter,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
                 ),
                 child: AppSearchField(
                   controller: _searchController,
@@ -81,7 +81,7 @@ class _QuranTabState extends State<QuranTab> {
                   onChanged: (value) => setState(() => _query = value),
                 ),
               ),
-              const SizedBox(height: AppDimens.homeSearchGap),
+              SizedBox(height: 20.h),
             ],
           ),
         ),
@@ -96,36 +96,35 @@ class _QuranTabState extends State<QuranTab> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     const _SectionTitle(AppStrings.mostRecently),
-                    const SizedBox(height: AppDimens.homeSectionGap),
+                    SizedBox(height: 10.h),
                     SizedBox(
-                      height: AppDimens.recentCardHeight,
+                      height: 150.h,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppDimens.homeGutter,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.w,
                         ),
                         itemCount: recents.length,
-                        separatorBuilder: (_, __) =>
-                            const SizedBox(width: AppDimens.recentCardGap),
+                        separatorBuilder: (_, __) => SizedBox(width: 10.w),
                         itemBuilder: (context, index) => RecentSuraCard(
                           sura: recents[index],
                           onTap: () => widget.onSuraSelected(recents[index]),
                         ),
                       ),
                     ),
-                    const SizedBox(height: AppDimens.homeSectionGap),
+                    SizedBox(height: 10.h),
                   ],
                 );
               },
             ),
           ),
           const SliverToBoxAdapter(child: _SectionTitle(AppStrings.surasList)),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: AppDimens.homeSectionGap),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 10.h),
           ),
         ],
         if (results.isEmpty)
-          const SliverFillRemaining(
+          SliverFillRemaining(
             hasScrollBody: false,
             child: Center(
               child: Text(
@@ -155,8 +154,8 @@ class _SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppDimens.homeSectionGutter,
+      padding: EdgeInsets.symmetric(
+        horizontal: 21.w,
       ),
       child: Text(label, style: AppTextStyles.sectionTitle),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'test_harness.dart';
 import 'package:islami/core/app_routes.dart';
 import 'package:islami/core/data/recent_suras_store.dart';
 import 'package:islami/core/data/sura_repository.dart';
@@ -28,7 +29,8 @@ Future<void> _pumpDetails(WidgetTester tester, Sura sura) async {
 
   await tester.runAsync(() => SuraRepository.versesOf(sura));
   await tester.pumpWidget(
-    MaterialApp(theme: AppTheme.dark, home: SuraDetailsScreen(sura: sura)),
+    scaled(
+        MaterialApp(theme: AppTheme.dark, home: SuraDetailsScreen(sura: sura))),
   );
   await tester.pump();
   await tester.pump();
@@ -78,13 +80,13 @@ void main() {
   testWidgets('tapping a sura on the home screen opens its reader',
       (tester) async {
     await tester.pumpWidget(
-      MaterialApp(
+      scaled(MaterialApp(
         theme: AppTheme.dark,
         home: const HomeScreen(),
         routes: const <String, WidgetBuilder>{
           AppRoutes.suraDetails: SuraDetailsScreen.fromRoute,
         },
-      ),
+      )),
     );
     await tester.pumpAndSettle();
 

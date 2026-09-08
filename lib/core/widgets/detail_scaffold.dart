@@ -1,16 +1,15 @@
 import 'dart:math' show pi;
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../app_assets.dart';
-import '../app_dimens.dart';
 import '../app_strings.dart';
-import '../design_scale.dart';
 import '../theme/app_theme.dart';
 
-/// The chrome shared by the Figma `Soura Details Screen` frames: a
-/// transparent app bar, two gold filigree corners around an Arabic heading,
-/// and the mosque band along the bottom.
+/// The chrome shared by the reader screens: a transparent app bar, two
+/// gold filigree corners around an Arabic heading, and the mosque band
+/// along the bottom.
 ///
 /// Both the sura reader and the hadith reader are built on it.
 class DetailScaffold extends StatelessWidget {
@@ -39,7 +38,7 @@ class DetailScaffold extends StatelessWidget {
             left: 0,
             right: 0,
             bottom: 0,
-            height: context.dy(AppDimens.detailBottomDecorationHeight),
+            height: 112.h,
             child: Image.asset(
               AppAssets.detailBottomDecoration,
               fit: BoxFit.cover,
@@ -53,7 +52,7 @@ class DetailScaffold extends StatelessWidget {
               children: <Widget>[
                 _DetailAppBar(title: title),
                 _HeadingBand(heading: heading),
-                const SizedBox(height: AppDimens.detailContentGap),
+                SizedBox(height: 33.h),
                 Expanded(child: child),
               ],
             ),
@@ -72,12 +71,12 @@ class _DetailAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppDimens.detailAppBarHeight,
+      height: 56.h,
       child: Stack(
         alignment: Alignment.centerLeft,
         children: <Widget>[
           Positioned(
-            left: AppDimens.detailBackArrowLeft,
+            left: 32.w,
             child: Semantics(
               button: true,
               label: AppStrings.back,
@@ -88,7 +87,7 @@ class _DetailAppBar extends StatelessWidget {
                   angle: pi,
                   child: SvgPicture.asset(
                     AppAssets.icBackArrow,
-                    width: AppDimens.detailBackArrowWidth,
+                    width: 18.w,
                   ),
                 ),
               ),
@@ -110,23 +109,23 @@ class _HeadingBand extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppDimens.detailCornerHeight,
+      height: 92.h,
       child: Stack(
         children: <Widget>[
-          const Positioned(
-            left: AppDimens.detailCornerLeft,
+          Positioned(
+            left: 18.w,
             top: 0,
-            child: _CornerOrnament(mirrored: true),
+            child: const _CornerOrnament(mirrored: true),
           ),
-          const Positioned(
-            right: AppDimens.detailCornerRight,
+          Positioned(
+            right: 20.w,
             top: 0,
-            child: _CornerOrnament(),
+            child: const _CornerOrnament(),
           ),
           Positioned(
             left: 0,
             right: 0,
-            top: AppDimens.detailHeadingTop,
+            top: 24.h,
             child: Text(
               heading,
               textAlign: TextAlign.center,
@@ -149,8 +148,8 @@ class _CornerOrnament extends StatelessWidget {
   Widget build(BuildContext context) {
     final ornament = Image.asset(
       AppAssets.detailCorner,
-      width: AppDimens.detailCornerWidth,
-      height: AppDimens.detailCornerHeight,
+      width: 93.w,
+      height: 92.h,
       color: AppColors.gold,
       colorBlendMode: BlendMode.srcIn,
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'test_harness.dart';
 import 'package:islami/core/app_assets.dart';
 import 'package:islami/core/data/radio_repository.dart';
 import 'package:islami/core/models/radio_station.dart';
@@ -33,8 +34,7 @@ void main() {
     expect(stations.single.url, 'https://x/1');
   });
 
-  test('the line-up loads from the bundle with no network at all',
-      () async {
+  test('the line-up loads from the bundle with no network at all', () async {
     // No HTTP is available under `flutter test`, so this is the offline
     // path end to end: the list must still arrive.
     final stations = await RadioRepository.load();
@@ -60,7 +60,7 @@ void main() {
       required bool isMuted,
       bool isBuffering = false,
     }) =>
-        MaterialApp(
+        scaled(MaterialApp(
           theme: AppTheme.dark,
           home: Scaffold(
             body: RadioStationCard(
@@ -72,7 +72,7 @@ void main() {
               onToggleMute: () => muteTaps++,
             ),
           ),
-        );
+        ));
 
     await tester.pumpWidget(card(isPlaying: false, isMuted: false));
     await tester.pump();

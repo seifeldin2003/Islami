@@ -1,22 +1,21 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/app_assets.dart';
-import '../../../core/app_dimens.dart';
 import '../../../core/app_durations.dart';
 import '../../../core/app_routes.dart';
 import '../../../core/app_strings.dart';
-import '../../../core/design_scale.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Absolute coordinates of the Figma `Splash Screen` frame (node 9:20),
-/// expressed on the 430 x 932 design canvas.
+/// Absolute coordinates of the splash composition, on the 430 x 932
+/// design canvas.
 class _Layout {
   const _Layout._();
 
   static const double skylineTop = 57;
-  static const double skylineWidth = AppDimens.headerWidth;
+  static const double skylineWidth = 291;
 
   static const double lanternLeft = 329;
   static const double lanternTop = 0;
@@ -43,7 +42,7 @@ class _Layout {
   /// The credit line is right-aligned; its right edge sits at x=337 on the
   /// 430pt canvas, so it is anchored by inset rather than by width (the
   /// font is not scaled with the canvas, so a fixed box would wrap).
-  static const double creditRightInset = AppDimens.designWidth - 337;
+  static const double creditRightInset = 430 - 337;
 }
 
 /// Branded launch screen; hands over to the intro flow after
@@ -85,51 +84,51 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Image.asset(AppAssets.splashBackground, fit: BoxFit.cover),
           ),
           Positioned(
-            top: context.dy(_Layout.skylineTop),
+            top: _Layout.skylineTop.h,
             left: 0,
             right: 0,
             child: Center(
               child: Image.asset(
                 AppAssets.mosqueSilhouette,
-                width: context.dx(_Layout.skylineWidth),
+                width: _Layout.skylineWidth.w,
               ),
             ),
           ),
           Positioned(
-            left: context.dx(_Layout.lanternLeft),
-            top: context.dy(_Layout.lanternTop),
-            width: context.dx(_Layout.lanternWidth),
+            left: _Layout.lanternLeft.w,
+            top: _Layout.lanternTop.h,
+            width: _Layout.lanternWidth.w,
             child: Image.asset(AppAssets.splashLantern),
           ),
           Positioned(
             left: 0,
-            top: context.dy(_Layout.ornamentLeftTop),
-            width: context.dx(_Layout.ornamentLeftWidth),
+            top: _Layout.ornamentLeftTop.h,
+            width: _Layout.ornamentLeftWidth.w,
             child: Image.asset(AppAssets.splashOrnamentLeft),
           ),
           Positioned(
-            left: context.dx(_Layout.ornamentRightLeft),
-            top: context.dy(_Layout.ornamentRightTop),
-            width: context.dx(_Layout.ornamentRightWidth),
+            left: _Layout.ornamentRightLeft.w,
+            top: _Layout.ornamentRightTop.h,
+            width: _Layout.ornamentRightWidth.w,
             child: Image.asset(AppAssets.splashOrnamentRight),
           ),
           Positioned(
-            left: context.dx(_Layout.logoLeft),
-            top: context.dy(_Layout.logoTop),
-            width: context.dx(_Layout.logoWidth),
+            left: _Layout.logoLeft.w,
+            top: _Layout.logoTop.h,
+            width: _Layout.logoWidth.w,
             child: Image.asset(AppAssets.splashLogo),
           ),
           Positioned(
-            left: context.dx(_Layout.routeLogoLeft),
-            top: context.dy(_Layout.routeLogoTop),
-            width: context.dx(_Layout.routeLogoWidth),
-            height: context.dy(_Layout.routeLogoHeight),
+            left: _Layout.routeLogoLeft.w,
+            top: _Layout.routeLogoTop.h,
+            width: _Layout.routeLogoWidth.w,
+            height: _Layout.routeLogoHeight.h,
             child: Image.asset(AppAssets.routeLogo, fit: BoxFit.cover),
           ),
           Positioned(
-            top: context.dy(_Layout.creditTop),
-            right: context.dx(_Layout.creditRightInset),
-            child: const Text(
+            top: _Layout.creditTop.h,
+            right: _Layout.creditRightInset.w,
+            child: Text(
               AppStrings.supervisedBy,
               maxLines: 1,
               textAlign: TextAlign.right,

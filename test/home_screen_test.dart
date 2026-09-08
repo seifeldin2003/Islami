@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'test_harness.dart';
 import 'package:islami/core/app_routes.dart';
 import 'package:islami/core/app_strings.dart';
 import 'package:islami/core/data/recent_suras_store.dart';
@@ -17,14 +18,15 @@ import 'package:islami/modules/quran/widgets/recent_sura_card.dart';
 import 'package:islami/modules/quran/widgets/sura_row.dart';
 
 Future<void> _pumpHome(WidgetTester tester) async {
+  useDesignSurface(tester);
   await tester.pumpWidget(
-    MaterialApp(
+    scaled(MaterialApp(
       theme: AppTheme.dark,
       home: const HomeScreen(),
       routes: const <String, WidgetBuilder>{
         AppRoutes.suraDetails: SuraDetailsScreen.fromRoute,
       },
-    ),
+    )),
   );
   await tester.pumpAndSettle();
 }
@@ -47,7 +49,7 @@ void main() {
       (tester) async {
     await _pumpHome(tester);
 
-    // The Figma mock-up types `الفاتحة`; the data set stores `الفاتحه`.
+    // Typed as `الفاتحة`; the data set stores `الفاتحه`.
     await tester.enterText(find.byType(TextField), 'الفاتحة');
     await tester.pumpAndSettle();
 

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/app_dimens.dart';
 import '../../../core/app_strings.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Figma `Group 20`: one verse in an outlined gold card.
+/// One verse in an outlined gold card.
 ///
-/// The card takes its height from the text, which is what makes the seventh
-/// verse of Al-Fatiha 120pt tall in the design while the rest are 70pt.
+/// The card takes its height from the text, so a long verse simply makes
+/// a taller card.
 class VerseCard extends StatelessWidget {
   const VerseCard({super.key, required this.number, required this.text});
 
@@ -17,20 +17,19 @@ class VerseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: AppDimens.verseCardPadding,
-        horizontal: AppDimens.verseCardTextInset,
+      padding: EdgeInsets.symmetric(
+        vertical: 10.h,
+        horizontal: 16.w,
       ),
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.gold),
-        borderRadius: BorderRadius.circular(AppDimens.verseCardRadius),
+        borderRadius: BorderRadius.circular(15.r),
       ),
       child: Text(
         AppStrings.verse(number, text),
         textAlign: TextAlign.center,
-        // Figma leaves the paragraph on `dir="auto"`, which resolves to RTL
-        // because the first strong character is Arabic. The leading `[n]` is
-        // neutral, so it lands at the right-hand end of the first line.
+        // The paragraph is right-to-left, and the leading `[n]` is a
+        // neutral run, so it lands at the right-hand end of the first line.
         textDirection: TextDirection.rtl,
         style: AppTextStyles.verse,
       ),

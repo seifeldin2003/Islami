@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../app_assets.dart';
-import '../app_dimens.dart';
 import '../app_strings.dart';
 import '../theme/app_theme.dart';
 
 /// The `Islami` lockup: the mosque silhouette with the Kamali wordmark laid
-/// over it, exactly as the Figma `img_header` / `Logo` frames compose it.
+/// over it.
 ///
 /// It is built from the transparent silhouette plus live text rather than a
 /// flattened bitmap, so it sits correctly on the home screen's photographic
 /// backdrop as well as on a flat background.
 class IslamiHeader extends StatelessWidget {
-  const IslamiHeader({super.key, this.width = AppDimens.headerWidth});
+  const IslamiHeader({super.key, this.width});
 
-  final double width;
+  /// Rendered width; defaults to the artboard's 291pt lockup.
+  final double? width;
 
-  /// Top-to-bottom gold gradient the Figma wordmark is filled with.
+  /// Top-to-bottom gold gradient the wordmark is filled with.
   static Shader _wordmarkShader(double fontSize) => const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
@@ -25,24 +26,28 @@ class IslamiHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scale = width / AppDimens.headerWidth;
+    // `.r` (the smaller of the width and height ratios) rather than `.w`:
+    // the lockup is artwork, so it has to scale uniformly instead of
+    // stretching to fill a wide viewport.
+    final width = this.width ?? 291.r;
+    final scale = width / 291;
     final fontSize = AppTextStyles.wordmark.fontSize! * scale;
 
     return SizedBox(
       width: width,
-      height: AppDimens.headerHeight * scale,
+      height: 171.h * scale,
       child: Stack(
         children: <Widget>[
           Positioned(
             left: 0,
             top: 0,
             width: width,
-            height: AppDimens.headerMosqueHeight * scale,
+            height: 151.h * scale,
             child: Image.asset(AppAssets.mosqueSilhouette, fit: BoxFit.fill),
           ),
           Positioned(
-            left: AppDimens.headerWordmarkLeft * scale,
-            top: AppDimens.headerWordmarkTop * scale,
+            left: 63.w * scale,
+            top: 75.h * scale,
             child: Text(
               AppStrings.appTitle,
               style: AppTextStyles.wordmark.copyWith(

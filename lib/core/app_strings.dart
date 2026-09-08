@@ -1,7 +1,7 @@
 /// Every user-facing string in the app.
 ///
-/// Copy is transcribed verbatim from the Figma file so the build stays
-/// faithful to the design; nothing is authored inline in a widget.
+/// Copy is transcribed verbatim from the design; nothing is authored
+/// inline in a widget.
 class AppStrings {
   const AppStrings._();
 
@@ -32,7 +32,7 @@ class AppStrings {
 
   /// The tasbeeh phrases, cycled every [tasbeehTarget] taps.
   ///
-  /// The Figma mock-up only shows `سبحان الله`; the remaining three are the
+  /// The design only shows `سبحان الله`; the remaining three are the
   /// customary tasbeeh that follows it.
   static const List<String> tasbeehPhrases = <String>[
     'سبحان الله',
@@ -58,8 +58,7 @@ class AppStrings {
   // Prayer times ---------------------------------------------------------
   static const String prayTime = 'Pray Time';
 
-  /// `intl` patterns behind the panel header, matching the Figma copy
-  /// "16 Jul, 2024" / "Tuesday" and the tiles' "04:38" / "PM".
+  /// `intl` patterns behind the panel header and the prayer tiles.
   static const String gregorianPattern = 'dd MMM,\nyyyy';
   static const String weekdayPattern = 'EEEE';
   static const String clockPattern = 'hh:mm';
@@ -68,7 +67,7 @@ class AppStrings {
   /// "Next Pray - 02:32" — time remaining until the next prayer.
   static String nextPray(String remaining) => 'Next Pray - $remaining';
 
-  /// Prayer labels, spelled as the Figma `Pray Time` cards spell them.
+  /// Prayer labels, spelled as the design spells them.
   static const String fajr = 'Fajr';
   static const String sunrise = 'Sunrise';
   static const String dhuhr = 'Dhuhr';
@@ -84,8 +83,8 @@ class AppStrings {
   static const String azkarSleeping = 'Sleeping Azkar';
 
   // Bottom navigation ----------------------------------------------------
-  // NOTE: the Figma Sebha screen labels its own tab "Hadith"; that is a
-  // duplicated label in the design, so this tab reads "Sebha".
+  // The design labels the Sebha tab "Hadith" — a duplicated label — so
+  // this one reads "Sebha" instead.
   static const String tabQuran = 'Quran';
   static const String tabHadeth = 'Hadith';
   static const String tabSebha = 'Sebha';
@@ -98,9 +97,8 @@ class AppStrings {
   static const String finish = 'Finish';
 
   // Intro slides ---------------------------------------------------------
-  // NOTE: `slide1Title` and `slide4Title` reproduce the Figma copy exactly,
-  // typo included ("Islmi", "Bearish") — see the hand-off note before
-  // "fixing" them.
+  // `slide1Title` and `slide4Title` reproduce the design copy exactly,
+  // typos included; they are deliberate, not mistakes.
   static const String slide1Title = 'Welcome To Islmi App';
 
   static const String slide2Title = 'Welcome To Islami';
@@ -108,8 +106,7 @@ class AppStrings {
       'We Are Very Excited To Have You In Our Community';
 
   static const String slide3Title = 'Reading the Quran';
-  static const String slide3Body =
-      'Read, and your Lord is the Most Generous';
+  static const String slide3Body = 'Read, and your Lord is the Most Generous';
 
   static const String slide4Title = 'Bearish';
   static const String slide4Body =

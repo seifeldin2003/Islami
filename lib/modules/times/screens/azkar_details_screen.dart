@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/app_dimens.dart';
 import '../../../core/app_routes.dart';
 import '../../../core/data/azkar_repository.dart';
-import '../../../core/design_scale.dart';
 import '../../../core/models/azkar_category.dart';
 import '../../../core/models/zikr.dart';
 import '../../../core/route_arguments.dart';
@@ -12,8 +11,8 @@ import '../../quran/widgets/verse_card.dart';
 
 /// The azkar of one collection, on the shared detail chrome.
 ///
-/// The Figma file has no frame for this screen — the azkar cards are the
-/// last thing it shows — so it reuses the sura / hadith reader layout.
+/// The design stops at the azkar cards, so this screen reuses the sura /
+/// hadith reader layout.
 class AzkarDetailsScreen extends StatelessWidget {
   const AzkarDetailsScreen({super.key, required this.category});
 
@@ -40,13 +39,12 @@ class AzkarDetailsScreen extends StatelessWidget {
           }
           return ListView.separated(
             padding: EdgeInsets.only(
-              left: AppDimens.verseCardGutter,
-              right: AppDimens.verseCardGutter,
-              bottom: context.dy(AppDimens.detailBottomDecorationHeight),
+              left: 18.w,
+              right: 18.w,
+              bottom: 112.h,
             ),
             itemCount: azkar.length,
-            separatorBuilder: (_, __) =>
-                const SizedBox(height: AppDimens.verseCardGap),
+            separatorBuilder: (_, __) => SizedBox(height: 8.h),
             itemBuilder: (context, index) => VerseCard(
               number: index + 1,
               text: azkar[index].content,

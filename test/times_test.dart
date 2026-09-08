@@ -2,6 +2,7 @@ import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'test_harness.dart';
 import 'package:islami/core/app_strings.dart';
 import 'package:islami/core/data/azkar_repository.dart';
 import 'package:islami/core/data/prayer_times_service.dart';
@@ -95,8 +96,7 @@ void main() {
     expect(schedule.untilNextPrayer, matches(RegExp(r'^\d{2}:\d{2}$')));
   });
 
-  test('after Isha the countdown rolls over to tomorrow instead of zero',
-      () {
+  test('after Isha the countdown rolls over to tomorrow instead of zero', () {
     // A day that is already finished: every prayer is in the past, so
     // `nextPrayer()` reports none.
     final finished = _scheduleFor(
@@ -125,10 +125,10 @@ void main() {
 
     final schedule = _scheduleFor(DateTime(2024, 7, 16));
     await tester.pumpWidget(
-      MaterialApp(
+      scaled(MaterialApp(
         theme: AppTheme.dark,
         home: Scaffold(body: PrayerPanel(schedule: schedule)),
-      ),
+      )),
     );
     await tester.pump();
 
@@ -144,7 +144,7 @@ void main() {
 
     AzkarCategory? tapped;
     await tester.pumpWidget(
-      MaterialApp(
+      scaled(MaterialApp(
         theme: AppTheme.dark,
         home: Scaffold(
           body: GridView.count(
@@ -159,7 +159,7 @@ void main() {
             ],
           ),
         ),
-      ),
+      )),
     );
     await tester.pump();
 

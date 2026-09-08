@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'test_harness.dart';
 import 'package:islami/core/app_routes.dart';
 import 'package:islami/core/app_strings.dart';
 import 'package:islami/core/data/hadith_repository.dart';
@@ -23,13 +24,13 @@ Future<void> _pumpTab(WidgetTester tester) async {
 
   await _warm(tester);
   await tester.pumpWidget(
-    MaterialApp(
+    scaled(MaterialApp(
       theme: AppTheme.dark,
       home: Scaffold(body: HadethTab(onHadithSelected: (_) {})),
       routes: const <String, WidgetBuilder>{
         AppRoutes.hadithDetails: HadithDetailsScreen.fromRoute,
       },
-    ),
+    )),
   );
   await tester.pump();
   await tester.pump();
@@ -40,8 +41,7 @@ void main() {
 
   setUp(HadithRepository.clearCache);
 
-  test('the collection holds fifty hadiths with a title and a body',
-      () async {
+  test('the collection holds fifty hadiths with a title and a body', () async {
     final hadiths = await HadithRepository.all();
 
     expect(hadiths, hasLength(HadithRepository.count));
@@ -86,10 +86,10 @@ void main() {
     addTearDown(tester.view.reset);
 
     await tester.pumpWidget(
-      MaterialApp(
+      scaled(MaterialApp(
         theme: AppTheme.dark,
         home: HadithDetailsScreen(hadith: hadiths.first),
-      ),
+      )),
     );
     await tester.pump();
 
@@ -122,12 +122,12 @@ void main() {
 
     await _warm(tester);
     await tester.pumpWidget(
-      MaterialApp(
+      scaled(MaterialApp(
         theme: AppTheme.dark,
         home: Scaffold(
           body: HadethTab(onHadithSelected: (h) => selected = h),
         ),
-      ),
+      )),
     );
     await tester.pump();
     await tester.pump();

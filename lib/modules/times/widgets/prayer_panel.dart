@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/app_dimens.dart';
 import '../../../core/app_strings.dart';
 import '../../../core/theme/app_theme.dart';
 import '../models/prayer_schedule.dart';
 
-/// Figma `Rectangle 138` (node 104:245): the day's prayer schedule.
+/// The day's prayer schedule.
 class PrayerPanel extends StatelessWidget {
   const PrayerPanel({super.key, required this.schedule});
 
@@ -14,15 +14,15 @@ class PrayerPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppDimens.prayPanelHeight,
+      height: 301.h,
       decoration: BoxDecoration(
         color: AppColors.prayPanel,
-        borderRadius: BorderRadius.circular(AppDimens.prayPanelRadius * 2),
+        borderRadius: BorderRadius.circular(20.r * 2),
       ),
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: AppDimens.prayHeaderHeight,
+            height: 76.h,
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -37,7 +37,7 @@ class PrayerPanel extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text(
+                    Text(
                       AppStrings.prayTime,
                       style: AppTextStyles.prayHeading,
                     ),
@@ -61,7 +61,7 @@ class PrayerPanel extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.gold,
                 borderRadius: BorderRadius.circular(
-                  AppDimens.prayPanelRadius * 2,
+                  20.r * 2,
                 ),
               ),
               child: Column(
@@ -74,14 +74,14 @@ class PrayerPanel extends StatelessWidget {
                         AppStrings.nextPray(schedule.untilNextPrayer),
                         style: AppTextStyles.nextPray,
                       ),
-                      const SizedBox(width: AppDimens.prayNextGap),
+                      SizedBox(width: 12.w),
                       const Icon(
                         Icons.volume_up,
                         color: AppColors.background,
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppDimens.prayNextGap),
+                  SizedBox(height: 12.w),
                 ],
               ),
             ),
@@ -101,14 +101,14 @@ class _Tiles extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: AppDimens.prayTileGap),
+      padding: EdgeInsets.symmetric(horizontal: 8.w),
       itemCount: schedule.entries.length,
-      separatorBuilder: (_, __) =>
-          const SizedBox(width: AppDimens.prayTileGap),
+      separatorBuilder: (_, __) => SizedBox(width: 8.w),
       itemBuilder: (context, index) {
         final entry = schedule.entries[index];
         return Center(
-          child: _Tile(entry: entry, isCurrent: entry.prayer == schedule.current),
+          child:
+              _Tile(entry: entry, isCurrent: entry.prayer == schedule.current),
         );
       },
     );
@@ -124,15 +124,11 @@ class _Tile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: isCurrent
-          ? AppDimens.prayTileActiveWidth
-          : AppDimens.prayTileWidth,
-      height: isCurrent
-          ? AppDimens.prayTileActiveHeight
-          : AppDimens.prayTileHeight,
+      width: isCurrent ? 104.w : 86.w,
+      height: isCurrent ? 128.h : 106.h,
       decoration: BoxDecoration(
         color: AppColors.background,
-        borderRadius: BorderRadius.circular(AppDimens.prayTileRadius),
+        borderRadius: BorderRadius.circular(16.r),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

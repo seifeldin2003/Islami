@@ -8,7 +8,7 @@ class AppAssets {
   static const String _hadeeth = 'assets/hadeeth';
   static const String _data = 'assets/data';
 
-  // Splash screen (Figma `Splash Screen`, node 9:20) ---------------------
+  // Splash screen ----------------------------------------------------
   static const String splashBackground = '$_images/background1.png';
 
   /// Mosque silhouette; used by the splash skyline and the `Islami` header.
@@ -19,14 +19,14 @@ class AppAssets {
   static const String splashLogo = '$_images/isalmi_mousqe.png';
   static const String routeLogo = '$_images/route_logo.png';
 
-  // Intro screens (Figma `Intro Screen`) --------------------------------
+  // Intro screens ----------------------------------------------------
   static const String introWelcome = '$_images/intro_welcome.png';
   static const String introKaaba = '$_images/intro_kaaba.png';
   static const String introQuran = '$_images/intro_quran.png';
   static const String introHands = '$_images/intro_hands.png';
   static const String introRadio = '$_images/intro_radio.png';
 
-  // Home screen (Figma `Home Screen`, node 27:34072) ---------------------
+  // Home screen ------------------------------------------------------
   static const String homeBackground = '$_images/home_background.jpg';
   static const String suraCardArt = '$_images/sura_card_art.png';
   static const String icSearchQuran = '$_icons/ic_search_quran.svg';
@@ -39,20 +39,21 @@ class AppAssets {
   static const String icRadio = '$_icons/ic_radio.svg';
   static const String icTime = '$_icons/ic_time.svg';
 
-  // Hadeth screen (Figma `Hadeth Screen`, node 40:12) -------------------
+  // Hadeth screen ----------------------------------------------------
   static const String hadethBackground = '$_images/hadeth_background.jpg';
   static const String hadithCardCorner = '$_images/hadith_card_corner.png';
   static const String hadithCardWatermark =
       '$_images/hadith_card_watermark.png';
+
   /// Mosque silhouette band along the foot of a hadith or radio card.
   static const String cardMosqueBand = '$_images/hadith_card_mosque.png';
 
-  // Sebha screen (Figma `Sebha Screen`, node 51:117) --------------------
+  // Sebha screen -----------------------------------------------------
   static const String sebhaBackground = '$_images/sebha_background.jpg';
   static const String sebhaHead = '$_images/sebha_head.png';
   static const String sebhaBody = '$_icons/sebha_body.svg';
 
-  // Radio screen (Figma `Radio Screen`, node 54:12) ----------------------
+  // Radio screen -----------------------------------------------------
   static const String radioBackground = '$_images/radio_background.jpg';
   static const String soundWave = '$_icons/sound_wave.svg';
 
@@ -62,16 +63,16 @@ class AppAssets {
   /// The azkar collection shown under the prayer times.
   static const String azkarData = '$_data/azkar.json';
 
-  // Prayer times screen (Figma `Time Screen`, node 104:18) ---------------
+  // Prayer times screen ----------------------------------------------
   static const String timesBackground = '$_images/times_background.jpg';
 
-  // Azkar cards (Figma `Group 19`, node 123:100) ------------------------
+  // Azkar cards ------------------------------------------------------
   static const String azkarEvening = '$_images/azkar_evening.png';
   static const String azkarMorning = '$_images/azkar_morning.png';
   static const String azkarWaking = '$_images/azkar_waking.png';
   static const String azkarSleeping = '$_images/azkar_sleeping.png';
 
-  // Detail screens (Figma `Soura Details Screen`, node 135:29) ----------
+  // Detail screens ---------------------------------------------------
   // Both are alpha masks: tint them with `BlendMode.srcIn`.
   static const String detailCorner = '$_images/detail_corner.png';
   static const String detailBottomDecoration =

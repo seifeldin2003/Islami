@@ -1,8 +1,7 @@
 import '../../../core/app_assets.dart';
 import '../../../core/app_strings.dart';
 
-/// The five destinations of the Figma `Bottom Navigation Bar`, in design
-/// order (left to right).
+/// The five destinations of the bottom navigation bar, left to right.
 enum HomeTab {
   quran(AppStrings.tabQuran, AppAssets.icQuran),
   hadeth(AppStrings.tabHadeth, AppAssets.icHadeth),
